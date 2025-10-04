@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "TakeAChanceOnMe-iOS-Default-1024x1024@1x 2.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -12,6 +13,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "TakeAChanceOnMe-iOS-Default-1024x1024@1x 1.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -23,6 +25,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "TakeAChanceOnMe-iOS-Default-1024x1024@1x.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
