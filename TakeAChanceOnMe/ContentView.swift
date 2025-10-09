@@ -1,3 +1,10 @@
+//
+//  ContentView.swift
+//  TakeAChanceOnMe
+//
+//  Created by Michael Fluharty on 10/3/25.
+//
+
 import SwiftUI
 
 struct ContentView: View {
@@ -50,8 +57,9 @@ struct ContentView: View {
                     
                     TextField("", text: $inputText)
                         .font(.system(size: 28, weight: .medium))
+                        .foregroundColor(.black)
                         .padding()
-                        .background(Color.white)
+                        .background(Color(white: 0.75))
                         .cornerRadius(12)
                         .keyboardType(.numberPad)
                         .onChange(of: inputText) { newValue in
