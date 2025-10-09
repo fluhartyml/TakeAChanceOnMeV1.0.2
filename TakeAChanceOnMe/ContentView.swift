@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  TakeAChanceOnMe
 //
-//  Created by Michael Fluharty on 10/3/25.
+//  Random number generator with gradient background
 //
 
 import SwiftUI
@@ -111,6 +111,8 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
