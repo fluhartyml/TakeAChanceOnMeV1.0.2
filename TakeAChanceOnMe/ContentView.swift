@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var maxNumber: Int = 100
     @State private var generatedNumber: Int?
     @State private var inputText: String = "100"
+    @FocusState private var isInputFocused: Bool
     
     var body: some View {
         ZStack {
@@ -24,6 +25,9 @@ struct ContentView: View {
                 endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
+            .onTapGesture {
+                isInputFocused = false
+            }
             
             VStack(spacing: 40) {
                 // Title
@@ -62,13 +66,30 @@ struct ContentView: View {
                         .background(Color(white: 0.75))
                         .cornerRadius(12)
                         .keyboardType(.numberPad)
+                        .focused($isInputFocused)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                Button("Done") {
+                                    isInputFocused = false
+                                }
+                            }
+                        }
                         .onChange(of: inputText) { newValue in
-                            if let number = Int(newValue), number >= 0 {
+                            // Only allow positive integers
+                            let filtered = newValue.filter { $0.isNumber }
+                            if filtered != newValue {
+                                inputText = filtered
+                            }
+                            
+                            if let number = Int(filtered), number >= 1 {
                                 maxNumber = number
+                            } else if filtered.isEmpty {
+                                maxNumber = 1
                             }
                         }
                     
-                    Text("Range: 0 to \(formatNumber(maxNumber))")
+                    Text("Range: 1 to \(formatNumber(maxNumber))")
                         .font(.system(size: 18))
                         .foregroundColor(.white.opacity(0.8))
                 }
@@ -93,14 +114,18 @@ struct ContentView: View {
     }
     
     private func generateNumber() {
-        guard maxNumber > 0 else {
+        // Dismiss keyboard when generating
+        isInputFocused = false
+        
+        guard maxNumber >= 1 else {
             generatedNumber = nil
             return
         }
         
-        let randomValue = Int.random(in: 0...maxNumber)
+        // Generate from 1 to maxNumber (inclusive)
+        let randomValue = Int.random(in: 1...maxNumber)
         // Cap display at 9 digits to prevent truncation
-        generatedNumber = randomValue % 1_000_000_000
+        generatedNumber = min(randomValue, 999_999_999)
     }
     
     private func formatNumber(_ number: Int) -> String {
