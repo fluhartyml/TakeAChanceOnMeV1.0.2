@@ -76,14 +76,19 @@ struct ContentView: View {
                             }
                         }
                         .onChange(of: inputText) { newValue in
-                            // Only allow positive integers
+                            // Only allow positive integers up to 100
                             let filtered = newValue.filter { $0.isNumber }
                             if filtered != newValue {
                                 inputText = filtered
                             }
-                            
+
                             if let number = Int(filtered), number >= 1 {
-                                maxNumber = number
+                                if number > 100 {
+                                    maxNumber = 100
+                                    inputText = "100"
+                                } else {
+                                    maxNumber = number
+                                }
                             } else if filtered.isEmpty {
                                 maxNumber = 1
                             }
@@ -123,9 +128,7 @@ struct ContentView: View {
         }
         
         // Generate from 1 to maxNumber (inclusive)
-        let randomValue = Int.random(in: 1...maxNumber)
-        // Cap display at 9 digits to prevent truncation
-        generatedNumber = min(randomValue, 999_999_999)
+        generatedNumber = Int.random(in: 1...maxNumber)
     }
     
     private func formatNumber(_ number: Int) -> String {

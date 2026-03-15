@@ -11,7 +11,17 @@ import SwiftUI
 struct TakeAChanceOnMeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ContentView()
+                    .tabItem {
+                        Label("Take A Chance", systemImage: "die.face.6.fill")
+                    }
+
+                DiceBagView()
+                    .tabItem {
+                        Label("Dice Bag", systemImage: "bag.fill")
+                    }
+            }
         }
     }
 }
