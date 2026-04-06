@@ -21,6 +21,11 @@ struct TakeAChanceOnMeApp: App {
                     .tabItem {
                         Label("Dice Bag", systemImage: "bag.fill")
                     }
+
+                AboutView()
+                    .tabItem {
+                        Label("About", systemImage: "info.circle.fill")
+                    }
             }
         }
     }
